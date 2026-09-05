@@ -1,0 +1,15 @@
+Package: jointBC
+Type: Package
+Title: Joint Regression for a Binary and a Continuous Outcome
+Version: 0.0.1
+Authors@R: person("Prototype", "Author", email = "prototype@example.org", role = c("aut", "cre"))
+Description: Fits a cross-sectional joint model for one Gaussian continuous
+    outcome and one binary outcome using a shared normal latent effect. The
+    subject-level likelihood is integrated with Gauss-Hermite quadrature.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

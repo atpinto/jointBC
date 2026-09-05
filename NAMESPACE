@@ -1,0 +1,11 @@
+export(joint_bc)
+export(joint_test)
+export(latent_correlation)
+export(simulate_joint_bc)
+S3method(coef,joint_bc)
+S3method(logLik,joint_bc)
+S3method(print,joint_bc)
+S3method(print,summary.joint_bc)
+S3method(summary,joint_bc)
+S3method(vcov,joint_bc)
+
