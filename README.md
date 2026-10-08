@@ -42,20 +42,50 @@ outcome's coding/sign, as in the paper's discussion.
 
 ## Quick start
 
-```r
-devtools::load_all("path/to/jointBC")
+Install the prototype from the local source archive. Replace the path below
+with the location of `jointBC_0.0.1.tar.gz` on your computer.
 
-dat <- simulate_joint_bc(1000, link = "logit", seed = 1)
+```r
+# Install the prototype once
+install.packages(
+  "/Users/ateixeirapinto/Documents/Codex/2026-09-05/referenced-chatgpt-conversation-this-is-an/outputs/jointBC_0.0.1.tar.gz",
+  repos = NULL,
+  type = "source"
+)
+
+library(jointBC)
+
+# Simulate 1,000 subjects with correlated continuous and binary outcomes
+dat <- simulate_joint_bc(
+  n = 1000,
+  link = "logit",
+  seed = 123
+)
+
+# Fit separate formulas:
+# - continuous outcome adjusted for treatment and x
+# - binary outcome adjusted only for treatment
 fit <- joint_bc(
-  y_cont ~ treatment + x,
-  y_bin ~ treatment,
+  formula_continuous = y_cont ~ treatment + x,
+  formula_binary     = y_bin  ~ treatment,
   data = dat,
   link = "logit",
   n_quad = 25
 )
 
+# Parameter estimates, standard errors, and latent correlation
 summary(fit)
-joint_test(fit, "treatment", method = "both")
+
+# Test whether treatment has no effect on either outcome
+joint_test(
+  fit,
+  terms = "treatment",
+  method = "both"
+)
+
+# Compare with models fitted separately to each outcome
+summary(glm(y_bin ~ treatment, family = binomial, data = dat))
+summary(glm(y_cont ~ treatment + x, data = dat))
 ```
 
 The omnibus test jointly tests every coefficient produced by each requested
